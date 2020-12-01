@@ -5,9 +5,7 @@ import uet.oop.bomberman.Game;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Swing Panel hiển thị thông tin thời gian, điểm mà người chơi đạt được
- */
+
 public class InfoPanel extends JPanel {
 	
 	private JLabel timeLabel;

@@ -2,7 +2,6 @@ package uet.oop.bomberman.sounds;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.net.URL;
 
 public class SoundEffect implements Runnable {
     public static final String BACKGROUND = "bg";

@@ -96,32 +96,32 @@ public class loadMap {
                         )
                 );
                 break;
-            // thêm Brick
+
             case '*':
                 _board.addEntity(position, new LayeredEntity(x, y,
                         new Grass(x, y, Sprite.grass),
                         new Brick(x, y, Sprite.brick)));
                 break;
-            // thêm Portal
+
             case 'x':
                 _board.addEntity(position, new LayeredEntity(x, y,
                         new Grass(x, y, Sprite.grass),
                         new Portal(x, y, _board, Sprite.portal),
                         new Brick(x, y, Sprite.brick)));
                 break;
-            // thêm Grass
+
             case ' ':
                 _board.addEntity(position, new Grass(x, y, Sprite.grass));
 
                 break;
-            // thêm Bomber
+
             case 'p':
                 _board.addCharacter(new Bomber(x * Game.TILES_SIZE, y * Game.TILES_SIZE + Game.TILES_SIZE, _board));
                 Screen.setOffset(0, 0);
 
                 _board.addEntity(position, new Grass(x, y, Sprite.grass));
                 break;
-            // thêm Enemy
+
             case '1':
                 _board.addCharacter(new Balloon(x * Game.TILES_SIZE, y * Game.TILES_SIZE + Game.TILES_SIZE, _board));
                 _board.addEntity(position, new Grass(x, y, Sprite.grass));

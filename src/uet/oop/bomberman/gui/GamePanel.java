@@ -6,9 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-/**
- * Swing Panel chứa cảnh game
- */
+
 public class GamePanel extends JPanel {
 
 	private Game _game;

@@ -63,7 +63,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                         keep = 0;
                     }
                     if (a == 2) keep = 1;
-                    if (a == -1) {//                        if (save == 1) keep = 3;
+                    if (a == -1) {
                         a = calculateRowDirection(keep);
                         follow = 2;
                     }

@@ -106,7 +106,7 @@ public class Screen {
             for (int x = 0; x < entity.getSprite().getSize(); x++) {
                 int xa = x + xp;
                 if (xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height)
-                    break; //fix black margins
+                    break;
                 if (xa < 0) xa = 0;
                 int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
                 if (color != TRANSPARENT_COLOR)
