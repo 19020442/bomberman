@@ -17,10 +17,6 @@ public class Frame extends JFrame {
     GamePanel _gamepanel;
     private JPanel _containerpane;
     private InfoPanel _infopanel;
-<<<<<<< HEAD
-=======
-
->>>>>>> 2b0ec83d02ed539f14f817251cf515ef36d2c519
     private Game _game;
 
 
