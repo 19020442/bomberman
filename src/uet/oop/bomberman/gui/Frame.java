@@ -18,8 +18,7 @@ public class Frame extends JFrame {
     private JPanel _containerpane;
     private JPanel _menu;
     private InfoPanel _infopanel;
-    private boolean offline = false;
-    private boolean exit = false;
+
     private Game _game;
 
 
