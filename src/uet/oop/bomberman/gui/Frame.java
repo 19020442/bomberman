@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-/**
- * Swing Frame chứa toàn bộ các component
 public class Frame extends JFrame {
 
     GamePanel _gamepanel;
