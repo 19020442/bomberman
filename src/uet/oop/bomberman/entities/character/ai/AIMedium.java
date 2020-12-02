@@ -54,6 +54,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
             updateLevel();
             _map_enemy[_e.getYTile()][_e.getXTile()] = '2';
             if (area_bomber >= 500) {
+                System.out.println(follow);
 
 
                 if (follow == 1) {
@@ -239,6 +240,47 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
         detect += seeBomber(i + 1, j);
         return detect;
     }
+//    public int seeBomberDirection(int i , int j, String a) {
+//        if (a.equals("right")) {
+//            if (i < 0 || i >= _map.getHeight() || j <= _e.getXTile() || j >= _map.getWidth()) {
+//                return 0;
+//            }
+//        }
+//        if (a.equals("up")) {
+//            if (i < 0 || i >= _e.getYTile() || j < 0|| j >= _map.getWidth()) {
+//                return 0;
+//            }
+//        }
+//        if (a.equals("down")) {
+//            if (i < _e.getYTile() || i >= _map.getHeight() || j <0  || j >= _map.getWidth()) {
+//                return 0;
+//            }
+//        }
+//        if (a.equals("left")) {
+//            if (i < 0 || i >= _map.getHeight() || j < 0 || j >= _e.getXTile()) {
+//                return 0;
+//            }
+//        }
+//
+//        if (i == _bomber.getYTile() && j == _bomber.getXTile()) {
+//            return 500;
+//        }
+//
+//
+//        if (_map_enemy[i][j] != ' ' && _map_enemy[i][j] != '2') {
+//            return 0;
+//        }
+//
+//
+//        _map_enemy[i][j] = '@';
+//        int detect = 1;
+//        detect += seeBomber(i - 1, j);
+//        detect += seeBomber(i, j - 1);
+//        detect += seeBomber(i, j);
+//        detect += seeBomber(i, j + 1);
+//        detect += seeBomber(i + 1, j);
+//        return detect;
+//    }
 
     public void updateLevel() {
         _game = _board.getGame();
@@ -273,26 +315,31 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
 
     public boolean right() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '*';
-        int compare = seeBomber(_e.getYTile(), _e.getXTile() + 1);
-
+//        int compare = seeBomberDirection(_e.getYTile(), _e.getXTile() + 1,"right");
+        int compare = seeBomber(_e.getYTile(), _e.getXTile()+1 );
         return compare >= 500;
+
     }
+
 
     public boolean down() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '*';
-        int compare = seeBomber(_e.getYTile() + 1, _e.getXTile());
+//        int compare = seeBomberDirection(_e.getYTile() + 1, _e.getXTile() , "down");
+        int compare = seeBomber(_e.getYTile()+1, _e.getXTile() );
         return compare >= 500;
     }
 
     public boolean left() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '*';
-        int compare = seeBomber( _e.getYTile(), _e.getXTile() - 1);
+//        int compare = seeBomberDirection( _e.getYTile(), _e.getXTile() - 1, "left");
+        int compare = seeBomber(_e.getYTile(), _e.getXTile() - 1);
         return compare >= 500;
     }
 
     public boolean up() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '@';
-        int compare = seeBomber( _e.getYTile() - 1, _e.getXTile());
+//        int compare = seeBomberDirection( _e.getYTile() - 1, _e.getXTile(), "up");
+        int compare = seeBomber(_e.getYTile()-1, _e.getXTile() );
         return compare >= 500;
     }
 
