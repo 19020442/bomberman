@@ -78,7 +78,7 @@ public class Bomb extends AnimatedEntities {
         if (entity instanceof Bomber) {
             double diffX = entity.getX() - getX()*Game.TILES_SIZE;
             double diffY = entity.getY() - getY()*Game.TILES_SIZE;
-           if (!(diffX >= -10 && diffX <= 15 && diffY >= 0 && diffY <= 32)) _allowedToPassThru = false;
+           if (!(diffX >= -10 && diffX <= 15 && diffY >= 1 && diffY <= 28)) _allowedToPassThru = false;
 
            return _allowedToPassThru;
         }
