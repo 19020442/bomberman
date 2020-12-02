@@ -22,16 +22,16 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
     int keep = 0;
     int save = 0;
 
-    loadMap _map ;
-    public char[][] _map_enemy ;
+    loadMap _map;
+    public char[][] _map_enemy;
     Game _game;
 
 
-    public AIMedium(Bomber bomber, Enemy e, Board board)  {
+    public AIMedium(Bomber bomber, Enemy e, Board board) {
         _bomber = bomber;
         _e = e;
         _board = board;
-        _map = new loadMap(null , _board.get_map().get_level());
+        _map = new loadMap(null, _board.get_map().get_level());
         _map_enemy = _map.get_map();
     }
 
@@ -42,7 +42,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
         if (!_game.isPaused()) {
             _map_enemy[_e.getYTile()][_e.getXTile()] = '2';
             reLoadMap();
-            int area_bomber = seeBomber(_map_enemy, _e.getYTile(), _e.getXTile());
+            int area_bomber = seeBomber(_e.getYTile(), _e.getXTile());
             for (int x = 0; x < 13; x++) {
                 for (int y = 0; y < 31; y++) {
                     if (_map_enemy[x][y] == '@') {
@@ -62,10 +62,18 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                     if (a == 0) {
                         keep = 0;
                     }
-                    if (a == 2) keep = 1;
+                    if (a == 2) keep = 2;
                     if (a == -1) {
+                        keep = save;
                         a = calculateRowDirection(keep);
-                        follow = 2;
+                        if ( a==-1 && _e.getYTile() == _bomber.getYTile()) {
+                            if (right()) return 1;
+                            if (down()) return 2;
+                            if (up()) return 0;
+                            if (left()) return 3;
+                        } else {
+                            follow = 2;
+                        }
                     }
                     save = a;
                     return a;
@@ -74,24 +82,33 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
 
                     int a = calculateRowDirection(keep);
                     if (a == -1) {
+                        keep = save;
                         a = calculateColDirection(keep);
-                        follow = 1;
+                        if ( a==-1 && _e.getXTile() == _bomber.getXTile() ) {
+                            if (right()) return 1;
+                            if (down()) return 2;
+                            if (up()) return 0;
+                            if (left()) return 3;
+                        }else {
+                            follow = 1;
+                        }
 
                     }
                     if (a == 1) {
-                        keep = 0;
+                        keep = 1;
                     }
                     if (a == 3) {
-                        keep = 1;
+                        keep = 3;
                     }
                     save = a;
                     return a;
                 }
 
-            }
-            else {
+            } else {
                 return random.nextInt(4);
             }
+
+
         }
         return -1;
     }
@@ -110,7 +127,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                     return 2;
                 }
             }
-            if (keep == 1) {
+            if (keep == 2) {
                 if (down() && _e.canMove(0, 1)) {
                     return 2;
                 }
@@ -134,7 +151,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                     return 2;
                 }
             }
-            if (keep == 1) {
+            if (keep == 2) {
                 if (down() && _e.canMove(0, 1)) {
                     return 2;
                 }
@@ -153,7 +170,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
             if (up() && _e.canMove(0, -1)) {
                 return 0;
             }
-            if (keep == 0) {
+            if (keep == 1) {
                 if (right() && _e.canMove(1, 0)) {
                     return 1;
                 }
@@ -161,7 +178,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                     return 3;
                 }
             }
-            if (keep == 1) {
+            if (keep == 3) {
                 if (left() && _e.canMove(-1, 0)) {
                     return 3;
                 }
@@ -177,7 +194,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
             if (down() && _e.canMove(0, 1)) {
                 return 2;
             }
-            if (keep == 0) {
+            if (keep == 1) {
                 if (right() && _e.canMove(1, 0)) {
                     return 1;
                 }
@@ -185,7 +202,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                     return 3;
                 }
             }
-            if (keep == 1) {
+            if (keep == 3) {
                 if (left() && _e.canMove(-1, 0)) {
                     return 3;
                 }
@@ -200,7 +217,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
         return -1;
     }
 
-    protected int seeBomber(char[][] matrix, int i, int j) {
+    protected int seeBomber(int i, int j) {
         if (i < 0 || i >= _map.getHeight() || j < 0 || j >= _map.getWidth()) {
             return 0;
         } else {
@@ -215,11 +232,11 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
         }
         _map_enemy[i][j] = '@';
         int detect = 1;
-        detect += seeBomber(matrix, i - 1, j);
-        detect += seeBomber(matrix, i, j - 1);
-        detect += seeBomber(matrix, i, j);
-        detect += seeBomber(matrix, i, j + 1);
-        detect += seeBomber(matrix, i + 1, j);
+        detect += seeBomber(i - 1, j);
+        detect += seeBomber(i, j - 1);
+        detect += seeBomber(i, j);
+        detect += seeBomber(i, j + 1);
+        detect += seeBomber(i + 1, j);
         return detect;
     }
 
@@ -245,7 +262,7 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
                     }
 
                 }
-                if (_board.getEntity(y,x,null).getClass() == Bomb.class) {
+                if (_board.getEntity(y, x, null).getClass() == Bomb.class) {
                     _map_enemy[x][y] = '*';
                 }
             }
@@ -256,28 +273,29 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
 
     public boolean right() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '*';
-        int compare = seeBomber(_map_enemy, _e.getYTile(), _e.getXTile() + 1);
+        int compare = seeBomber(_e.getYTile(), _e.getXTile() + 1);
 
         return compare >= 500;
     }
 
     public boolean down() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '*';
-        int compare = seeBomber(_map_enemy, _e.getYTile() + 1, _e.getXTile());
+        int compare = seeBomber(_e.getYTile() + 1, _e.getXTile());
         return compare >= 500;
     }
 
     public boolean left() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '*';
-        int compare = seeBomber(_map_enemy, _e.getYTile(), _e.getXTile() - 1);
+        int compare = seeBomber( _e.getYTile(), _e.getXTile() - 1);
         return compare >= 500;
     }
 
     public boolean up() {
         _map_enemy[_e.getYTile()][_e.getXTile()] = '@';
-        int compare = seeBomber(_map_enemy, _e.getYTile() - 1, _e.getXTile());
+        int compare = seeBomber( _e.getYTile() - 1, _e.getXTile());
         return compare >= 500;
     }
+
     public void reLoadMap() {
         for (int x = 0; x < 13; x++) {
             for (int y = 0; y < 31; y++) {
@@ -287,4 +305,5 @@ public class AIMedium extends uet.oop.bomberman.entities.character.ai.AI {
             }
         }
     }
+
 }
