@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class InfoPanel extends JPanel {
+public class 	InfoPanel extends JPanel {
 	
 	private JLabel timeLabel;
 	private JLabel pointsLabel;

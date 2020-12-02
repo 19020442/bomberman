@@ -10,10 +10,10 @@ import java.io.IOException;
 public class GamePanel extends JPanel {
 
 	private Game _game;
-	
-	public GamePanel(Frame frame) throws IOException {
+
+	public GamePanel(Frame frame) {
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE ));
+		setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
 		_game = new Game(frame);
 
@@ -23,7 +23,7 @@ public class GamePanel extends JPanel {
 
 		setVisible(true);
 		setFocusable(true);
-		
+
 	}
 
 	public Game getGame() {

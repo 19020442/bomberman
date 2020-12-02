@@ -28,7 +28,6 @@ public class Bomber extends Character {
 
     @Override
     public void update() {
-
         clearBombs();
         if (!alive) {
             afterKill();
@@ -123,13 +122,13 @@ public class Bomber extends Character {
 
     @Override
     public boolean canMove(double x, double y) {
-        for (int c = 0; c < 4; c++) {
+        for (int c = 0; c < 4; c ++) {
             double xt = ((_x + x) + c % 2 * 11) / Game.TILES_SIZE;
             double yt = ((_y + y) + c / 2 * 12 - 13) / Game.TILES_SIZE;
 
-            Entity a = _board.getEntity(xt, yt,this);
+            Entity a = _board.getEntity(xt, yt, this);
 
-            if (!a.collide(this))
+            if(!a.collide(this))
                 return false;
         }
 
@@ -160,7 +159,6 @@ public class Bomber extends Character {
             kill();
             return true;
         }
-
         return true;
     }
 

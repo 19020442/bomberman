@@ -110,11 +110,6 @@ public class loadMap {
                         new Brick(x, y, Sprite.brick)));
                 break;
 
-            case ' ':
-                _board.addEntity(position, new Grass(x, y, Sprite.grass));
-
-                break;
-
             case 'p':
                 _board.addCharacter(new Bomber(x * Game.TILES_SIZE, y * Game.TILES_SIZE + Game.TILES_SIZE, _board));
                 Screen.setOffset(0, 0);

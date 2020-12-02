@@ -6,6 +6,7 @@ import uet.oop.bomberman.entities.AnimatedEntities;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.Character;
+import uet.oop.bomberman.entities.character.Enemy;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.sounds.SoundEffect;
@@ -58,6 +59,7 @@ public class Bomb extends AnimatedEntities {
     }
 
     private void renderFlame(Screen screen) {
+
         for (Flame flame : _flame) {
             flame.render(screen);
         }
@@ -76,15 +78,15 @@ public class Bomb extends AnimatedEntities {
         if (entity instanceof Bomber) {
             double diffX = entity.getX() - getX()*Game.TILES_SIZE;
             double diffY = entity.getY() - getY()*Game.TILES_SIZE;
+           if (!(diffX >= -10 && diffX <= 15 && diffY >= 0 && diffY <= 32)) _allowedToPassThru = false;
 
-            if (!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) _allowedToPassThru = false;
-
-            return _allowedToPassThru;
+           return _allowedToPassThru;
         }
         if (entity instanceof Flame) {
             timeToExplode = 0;
             return true;
         }
+
 
         return false;
     }

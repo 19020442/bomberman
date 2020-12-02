@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Board  {
+public class Board {
     loadMap _map;
     Game _game;
     Screen _screen;
@@ -38,13 +38,14 @@ public class Board  {
         _game = game;
         _screen = screen;
         _input = input;
-        SoundEffect background  = new SoundEffect(SoundEffect.BACKGROUND);
+        SoundEffect background = new SoundEffect(SoundEffect.BACKGROUND);
         background.loop();
         loadLevel(1);
 
     }
+
     public void update() {
-        if( _game.isPaused() ) return;
+        if (_game.isPaused()) return;
         updateBombs();
         updateCharacters();
         updateEntities();
@@ -56,7 +57,7 @@ public class Board  {
     }
 
     public void render(Screen screen) {
-        if( _game.isPaused() ) return;
+        if (_game.isPaused()) return;
         int x0 = Screen.xOffSet / Game.TILES_SIZE;
         int x1 = (Screen.xOffSet + _screen.getWidth() + Game.TILES_SIZE) / Game.TILES_SIZE;
         int y0 = Screen.yOffSet / Game.TILES_SIZE;
@@ -71,14 +72,14 @@ public class Board  {
     }
 
     public void updateEntities() {
-        if( _game.isPaused() ) return;
+        if (_game.isPaused()) return;
         for (Entity entity : _entities) {
             entity.update();
         }
     }
 
     public void updateCharacters() {
-        if( _game.isPaused() ) return;
+        if (_game.isPaused()) return;
         Iterator<Character> characterIterator = _characters.iterator();
         while (characterIterator.hasNext() && !_game._pause) {
             characterIterator.next().update();
@@ -86,7 +87,7 @@ public class Board  {
     }
 
     public void updateBombs() {
-        if( _game.isPaused() ) return;
+        if (_game.isPaused()) return;
         for (Bomb bomb : _bomb) {
             bomb.update();
         }
@@ -100,7 +101,7 @@ public class Board  {
             bomb = iterator.next();
 
             FlameSegment flameSegment = bomb.flameAt(x, y);
-                if (flameSegment != null) return flameSegment;
+            if (flameSegment != null) return flameSegment;
         }
         return null;
     }
@@ -169,10 +170,14 @@ public class Board  {
     }
 
     private Entity getBombAt(double x, double y) {
-        for (int i = 0; i < _bomb.size(); i++) {
-            if (_bomb.get(i).getX() == x && _bomb.get(i).getY() == y) {
-                return _bomb.get(i);
+        Iterator<Bomb> bombIterator = _bomb.iterator();
+        Bomb bomb;
+        while (bombIterator.hasNext()) {
+            bomb = bombIterator.next();
+            if (bomb.getX() == (int) x && bomb.getY() == (int) y) {
+                return bomb;
             }
+
         }
         return null;
     }
@@ -244,11 +249,6 @@ public class Board  {
     public void renderCharacter(Screen screen) {
         for (Character character : _characters) {
             character.render(screen);
-        }
-    }
-    public void renderEntity(Screen screen) {
-        for (Entity entity : _entities) {
-            entity.render(screen);
         }
     }
 
